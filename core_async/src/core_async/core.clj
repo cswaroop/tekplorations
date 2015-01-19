@@ -12,5 +12,7 @@
 
 
 
-
-
+(let [result (future (println "This prints once")
+                     (+ 1 1))]
+  (println @result)
+  (println @result)
