@@ -1,32 +1,12 @@
 # core_async
 
-FIXME: description
+example project to set up core.async and tryout few samples
 
 ## Installation
 
-Download from http://example.com/FIXME.
+lein repl
 
 ## Usage
-
-FIXME: explanation
-
-    $ java -jar core_async-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 
