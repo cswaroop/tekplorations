@@ -26,7 +26,7 @@
 
 
 
-; (immutable) data structures
+; (immutable and transient) data structures
 
 ;; lists ()
 
@@ -49,8 +49,15 @@
 #{:a :b :c} ; => #{:a :b :c}
 (get #{:a :b} :b)
 (get #{:a :b} "hannah montana") ; => nil
-(conj #{:a :b} :b) => #{:a :b}
 (:a #{:a :b}) ; => :a
+(conj #{:a :b} :b) => #{:a :b}
+
+(set [1 2 3 4 4]) ; => #{1 2 3 4}
+(get (set [1 2 2 2 3]) 3)  ; => 3
+
+(hash-set 1 1 2 3 4)
+(sorted-set :b :a :c) ; sorted-set-by to pass sort function
+
 
 ;; maps {}
 
@@ -66,23 +73,57 @@
 
 (hash-map :a 1 :b 2) ;
 
-
+;; there is no map operator to create maps.  map is a HOF
 
 ;; records
 
+;; symbols as data
+
+(identity 'test) ; => test
+
 
 ;functional programming
+
+;; Functions are first-class. define, call, return named and anonymous functions
+
+;; generatlize over processes(conj) not nouns (Vehicle->Car). Functional vs OO
+
+;; whole clojure is defined out of very few special forms; infact
+;; McCarthy had defined whole lisp with7 special forms car, cdr, first, next etc.
+;; He must have invented such as simple language, because he already have enough complexity to deal with (AI). (rant)
+
+;; anymous functions
+
+(fn [x] (* x 3))
+#(* % 3)
+(#(* % 3) 8)
+(map #(str "Hi, " %) ; % is like %1
+     ["Darth Vader" "Mr. Magoo"])
 
 
 ;; Higher-order-programmin.g (HOP)
 
 ;;; map
 ;;; reduce
-;;; comp
+;;; comp;
+;;; into
+;;; conj
+;;; concat
+;;; some
+;;; filter
+;;; take
+;;; drop
+;;; sort
+;;; sort-by
+;;; identity
+;;; apply
+;;; partial
+;;; complement
+
 
 ;; reducers
 ;; transducers
-;; descructuring
+;; destructuring
 
 ; macros
 

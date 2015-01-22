@@ -3,11 +3,21 @@
             [ring.util.response :as response]
             [address-book.core.views.address-book-layout :refer [common-layout
                                                                  read-contact
-                                                                 add-contact-form]]))
+                                                                 add-contact-form]]
+            [address-book.core.models.query-defs :as query]))
 
-(def contacts (atom [{:id 1 :name "Jarrod" :phone "(555) 666-6666" :email "Jarrod@Jarrod"}
-                     {:id 2 :name "James" :phone "(333) 344-4443" :email "James@James"}
-                     {:id 3 :name "Johnny" :phone "(444) 333-3333" :email "Johnyy@Johnyy"}]))
+(def contacts (atom [{:id 1 
+                      :name "Jarrod" 
+                      :phone "(555) 666-6666" 
+                      :email "Jarrod@Jarrod"}
+                     {:id 2 
+                      :name "James" 
+                      :phone "(333) 344-4443" 
+                      :email "James@James"}
+                     {:id 3 
+                      :name "Johnny" 
+                      :phone "(444) 333-3333" 
+                      :email "Johnyy@Johnyy"}]))
 
 (defn next-id []
   (->>
@@ -20,12 +30,13 @@
   (let [name (get-in request [:params :name])
         phone (get-in request [:params :phone])
         email (get-in request [:params :email])]
-    (swap! contacts conj {:id (next-id) :name name :phone phone :email email})
+    ;(swap! contacts conj {:id (next-id) :name name :phone phone :email email})
+    (query/insert-contacts<! {:name name :phone phone :email email})
     (response/redirect "/")))
 
 (defn get-route [request]
   (common-layout
-   (for [contact @contacts]
+   (for [contact (query/all-contacts)]
      (read-contact contact))
    (add-contact-form)))
 

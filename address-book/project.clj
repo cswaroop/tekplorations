@@ -6,6 +6,10 @@
                  [midje "1.6.3"]
                  [org.clojure/java.jdbc "0.3.6"]
                  [postgresql/postgresql "9.3-1102.jdbc41"]
+                 [mysql/mysql-connector-java "5.1.32"]
+                 [org.xerial/sqlite-jdbc "3.7.2"]
+                 [org.apache.derby/derby "10.11.1.1"]
+;                 [com.oracle.ojdbc14 "10.2.0.4.0"]
                  [yesql "0.5.0-rc1"]
                  [environ "1.0.0"]
                  ;[com.cemerick/drawbridge "0.0.6"]
@@ -21,4 +25,6 @@
                  :port 9998}}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring-mock "0.1.5"]]}})
+                        [ring-mock "0.1.5"]]
+         :dev-env-vars {:env 
+                        {:database-url "postgres://postgres:postgres@127.0.0.1:5432/address_book"}}}})
